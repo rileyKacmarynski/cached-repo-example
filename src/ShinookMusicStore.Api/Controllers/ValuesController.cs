@@ -2,19 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Models;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ShinookMusicStore.Api.Controllers
+namespace ChinookMusicStore.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ChinookContext _context;
+
+        public ValuesController(ChinookContext context)
+        {
+            _context = context;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Artist>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _context.Artist.ToList();
         }
 
         // GET api/values/5
