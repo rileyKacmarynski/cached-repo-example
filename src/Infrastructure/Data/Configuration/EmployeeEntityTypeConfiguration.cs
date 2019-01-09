@@ -11,7 +11,9 @@ namespace Infrastructure.Data.Configuration
             builder.HasIndex(e => e.ReportsTo)
             .HasName("IFK_EmployeeReportsTo");
 
-            builder.Property(e => e.EmployeeId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("EmployeeId")
+                .ValueGeneratedNever();
 
             builder.Property(e => e.Address).HasMaxLength(70);
 

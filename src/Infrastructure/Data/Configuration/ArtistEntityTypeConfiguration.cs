@@ -11,7 +11,9 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Artist> builder)
         {
-            builder.Property(e => e.ArtistId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("ArtistId")
+                .ValueGeneratedNever();
             builder.Property(e => e.Name).HasMaxLength(120);
         }
     }

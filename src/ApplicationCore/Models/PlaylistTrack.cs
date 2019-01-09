@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class PlaylistTrack
+    public partial class PlaylistTrack : BaseModel
     {
-        public int PlaylistId { get; set; }
         public int TrackId { get; set; }
 
         public virtual Playlist Playlist { get; set; }

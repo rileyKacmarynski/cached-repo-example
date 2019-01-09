@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class Playlist
+    public partial class Playlist : BaseModel
     {
         public Playlist()
         {
             PlaylistTrack = new HashSet<PlaylistTrack>();
         }
 
-        public int PlaylistId { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<PlaylistTrack> PlaylistTrack { get; set; }

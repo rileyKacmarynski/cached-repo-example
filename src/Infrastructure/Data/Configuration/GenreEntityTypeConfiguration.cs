@@ -8,7 +8,9 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
-            builder.Property(e => e.GenreId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("GenreId")
+                .ValueGeneratedNever();
             builder.Property(e => e.Name).HasMaxLength(120);
         }
     }

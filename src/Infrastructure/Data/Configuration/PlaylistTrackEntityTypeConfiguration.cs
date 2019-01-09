@@ -8,7 +8,10 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<PlaylistTrack> builder)
         {
-            builder.HasKey(e => new { e.PlaylistId, e.TrackId })
+            builder.Property(e => e.Id)
+                .HasColumnName("PlayListTrackId");
+
+            builder.HasKey(e => new { e.Id, e.TrackId })
                 .ForSqlServerIsClustered(false);
 
             builder.HasIndex(e => e.TrackId)
@@ -16,7 +19,7 @@ namespace Infrastructure.Data.Configuration
 
             builder.HasOne(d => d.Playlist)
                 .WithMany(p => p.PlaylistTrack)
-                .HasForeignKey(d => d.PlaylistId)
+                .HasForeignKey(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_PlaylistTrackPlaylistId");
 

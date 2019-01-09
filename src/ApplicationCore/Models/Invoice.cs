@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class Invoice
+    public partial class Invoice : BaseModel
     {
         public Invoice()
         {
             InvoiceLine = new HashSet<InvoiceLine>();
         }
 
-        public int InvoiceId { get; set; }
         public int CustomerId { get; set; }
         public DateTime InvoiceDate { get; set; }
         public string BillingAddress { get; set; }

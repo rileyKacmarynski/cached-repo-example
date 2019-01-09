@@ -8,7 +8,9 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<MediaType> builder)
         {
-            builder.Property(e => e.MediaTypeId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("MediaTypeId")
+                .ValueGeneratedNever();
             builder.Property(e => e.Name).HasMaxLength(120);
         }
     }

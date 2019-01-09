@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class Employee
+    public partial class Employee : BaseModel
     {
         public Employee()
         {
@@ -11,7 +11,6 @@ namespace ApplicationCore.Models
             InverseReportsToNavigation = new HashSet<Employee>();
         }
 
-        public int EmployeeId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Title { get; set; }

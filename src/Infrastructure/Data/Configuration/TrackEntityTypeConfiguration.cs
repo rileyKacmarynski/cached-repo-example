@@ -17,7 +17,9 @@ namespace Infrastructure.Data.Configuration
             builder.HasIndex(e => e.MediaTypeId)
                 .HasName("IFK_TrackMediaTypeId");
 
-            builder.Property(e => e.TrackId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("TrackId")
+                .ValueGeneratedNever();
 
             builder.Property(e => e.Composer).HasMaxLength(220);
 

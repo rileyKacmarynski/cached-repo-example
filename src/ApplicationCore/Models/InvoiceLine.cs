@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class InvoiceLine
+    public partial class InvoiceLine : BaseModel
     {
-        public int InvoiceLineId { get; set; }
         public int InvoiceId { get; set; }
         public int TrackId { get; set; }
         public decimal UnitPrice { get; set; }

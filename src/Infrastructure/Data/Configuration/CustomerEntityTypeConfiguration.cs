@@ -11,7 +11,9 @@ namespace Infrastructure.Data.Configuration
             builder.HasIndex(e => e.SupportRepId)
             .HasName("IFK_CustomerSupportRepId");
 
-            builder.Property(e => e.CustomerId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("CustomerId")
+                .ValueGeneratedNever();
 
             builder.Property(e => e.Address).HasMaxLength(70);
 

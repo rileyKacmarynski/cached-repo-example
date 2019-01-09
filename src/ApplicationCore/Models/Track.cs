@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class Track
+    public partial class Track : BaseModel
     {
         public Track()
         {
@@ -11,7 +11,6 @@ namespace ApplicationCore.Models
             PlaylistTrack = new HashSet<PlaylistTrack>();
         }
 
-        public int TrackId { get; set; }
         public string Name { get; set; }
         public int? AlbumId { get; set; }
         public int MediaTypeId { get; set; }

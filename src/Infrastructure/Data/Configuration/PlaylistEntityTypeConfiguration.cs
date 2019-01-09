@@ -8,7 +8,9 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Playlist> builder)
         {
-            builder.Property(e => e.PlaylistId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("PlaylistId")
+                .ValueGeneratedNever();
             builder.Property(e => e.Name).HasMaxLength(120);
         }
     }

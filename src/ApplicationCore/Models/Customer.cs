@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Models
 {
-    public partial class Customer
+    public partial class Customer : BaseModel
     {
         public Customer()
         {
             Invoice = new HashSet<Invoice>();
         }
 
-        public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Company { get; set; }

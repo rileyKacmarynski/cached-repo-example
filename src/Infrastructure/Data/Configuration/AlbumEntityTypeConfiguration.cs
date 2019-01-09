@@ -11,7 +11,9 @@ namespace Infrastructure.Data.Configuration
             builder.HasIndex(e => e.ArtistId)
             .HasName("IFK_AlbumArtistId");
 
-            builder.Property(e => e.AlbumId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("AlbumId")
+                .ValueGeneratedNever();
 
             builder.Property(e => e.Title)
                 .IsRequired()

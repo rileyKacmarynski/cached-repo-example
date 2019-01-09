@@ -14,7 +14,9 @@ namespace Infrastructure.Data.Configuration
             builder.HasIndex(e => e.TrackId)
                 .HasName("IFK_InvoiceLineTrackId");
 
-            builder.Property(e => e.InvoiceLineId).ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnName("InvoiceLineId")
+                .ValueGeneratedNever();
 
             builder.Property(e => e.UnitPrice).HasColumnType("numeric(10, 2)");
 
