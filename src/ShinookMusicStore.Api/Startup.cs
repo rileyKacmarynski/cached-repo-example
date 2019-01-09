@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using FluentValidation.AspNetCore;
+using ApplicationCore.Common;
+using MediatR;
 
 namespace ChinookMusicStore.Api
 {
@@ -29,11 +32,18 @@ namespace ChinookMusicStore.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            //TODO: Change this to a handler when I get there
+            services.AddMediatR(typeof(Result).Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                //TODO: Change this to a validator when I get there.
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Result>());             
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Shinook Music Store API", Version = "V1" });
+                c.SwaggerDoc("v1", new Info { Title = "Chinook Music Store API", Version = "V1" });
             });
 
             services.AddDbContext<ChinookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
