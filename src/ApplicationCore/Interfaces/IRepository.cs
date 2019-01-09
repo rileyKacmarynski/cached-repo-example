@@ -8,13 +8,13 @@ namespace ApplicationCore.Interfaces
 {
     public interface IRepository<T> where T : BaseModel
     {
-        T GetById(int id);
-        //T GetSingleBySpec()
-        IEnumerable<T> ListAll();
+        Task<T> GetByIdAsync(int id);
+        //Task<T> GetSingleBySpecAsync()
+        Task<IEnumerable<T>> ListAllAsync();
         //IEnumerable<T> List()
-        T Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-        //int Count(ISpecification<T> spec);
+        Task<T> AddAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(T entity);
+        //Task<int> CountAsync(ISpecification<T> spec);
     }
 }
