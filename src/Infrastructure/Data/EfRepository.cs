@@ -17,7 +17,7 @@ namespace Infrastructure.Data
             this._context = context;
         }
 
-        public async Task<T> AddAsync(T entity)
+        public T Add(T entity)
         {
             _context.Set<T>().Add(entity);
             _context.SaveChanges();

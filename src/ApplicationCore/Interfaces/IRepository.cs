@@ -12,7 +12,7 @@ namespace ApplicationCore.Interfaces
         //Task<T> GetSingleBySpecAsync()
         Task<IEnumerable<T>> ListAllAsync();
         //IEnumerable<T> List()
-        Task<T> AddAsync(T entity);
+        T Add(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
         //Task<int> CountAsync(ISpecification<T> spec);
