@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ApplicationCore.Models;
-using Infrastructure.Data;
+﻿using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using FluentValidation.AspNetCore;
 using ApplicationCore.Common;
 using MediatR;
+using ApplicationCore.Tracks.GetTracks;
+using Domain.Models;
+using ApplicationCore.Interfaces;
 
 namespace ChinookMusicStore.Api
 {
@@ -32,8 +27,7 @@ namespace ChinookMusicStore.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //TODO: Change this to a handler when I get there
-            services.AddMediatR(typeof(Result).Assembly);
+            services.AddMediatR(typeof(GetTracksRequest).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             services.AddMvc()
@@ -45,6 +39,8 @@ namespace ChinookMusicStore.Api
             {
                 c.SwaggerDoc("v1", new Info { Title = "Chinook Music Store API", Version = "V1" });
             });
+
+            services.AddScoped<IRepository<Track>, EfRepository<Track>>();
 
             services.AddDbContext<ChinookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

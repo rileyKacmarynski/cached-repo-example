@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ApplicationCore.Models
+namespace Domain.Models
 {
     public partial class Playlist : BaseModel
     {

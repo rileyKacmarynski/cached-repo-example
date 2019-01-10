@@ -1,5 +1,5 @@
 ﻿using ApplicationCore.Interfaces;
-using ApplicationCore.Models;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Infrastructure.Data
 
         public EfRepository(ChinookContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public T Add(T entity)

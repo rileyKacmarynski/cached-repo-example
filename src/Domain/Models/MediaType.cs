@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ApplicationCore.Models
+namespace Domain.Models
 {
-    public partial class Genre : BaseModel
+    public partial class MediaType : BaseModel
     {
-        public Genre()
+        public MediaType()
         {
             Track = new HashSet<Track>();
         }
