@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Tracks\GetTracksForAlbum\" />
-    <Folder Include="Tracks\GetTrackDetail\" />
   </ItemGroup>
 
   <ItemGroup>

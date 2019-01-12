@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<MediaType> builder)
         {
+            builder.ToTable("MeidaType");
+
             builder.Property(e => e.Id)
                 .HasColumnName("MediaTypeId")
                 .ValueGeneratedNever();

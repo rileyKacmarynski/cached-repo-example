@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Playlist> builder)
         {
+            builder.ToTable("Playlist");
+
             builder.Property(e => e.Id)
                 .HasColumnName("PlaylistId")
                 .ValueGeneratedNever();

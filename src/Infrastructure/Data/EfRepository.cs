@@ -10,14 +10,14 @@ namespace Infrastructure.Data
 {
     public class EfRepository<T> : IRepository<T> where T : BaseModel
     {
-        private readonly ChinookContext _context;
+        protected readonly ChinookContext _context;
 
         public EfRepository(ChinookContext context)
         {
             _context = context;
         }
 
-        public T Add(T entity)
+        public virtual T Add(T entity)
         {
             _context.Set<T>().Add(entity);
             _context.SaveChanges();
@@ -25,23 +25,23 @@ namespace Infrastructure.Data
             return entity;
         }
 
-        public async Task DeleteAsync(T entity)
+        public virtual async Task DeleteAsync(T entity)
         {
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> ListAllAsync()
+        public virtual async Task<IEnumerable<T>> ListAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public virtual async Task UpdateAsync(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();

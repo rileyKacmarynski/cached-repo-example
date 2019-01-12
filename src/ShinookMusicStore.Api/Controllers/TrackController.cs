@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationCore.Common;
 using ApplicationCore.Tracks.Dtos;
+using ApplicationCore.Tracks.GetTrack;
 using ApplicationCore.Tracks.GetTracks;
 using Infrastructure.Data;
 using MediatR;
@@ -31,6 +32,13 @@ namespace Api.Controllers
         public async Task<ActionResult<Result<IEnumerable<TrackDto>>>> Index(CancellationToken cancellationToken)
         {
             return await _mediator.Send(new GetTracksRequest(), cancellationToken);
+        }
+
+        [HttpGet]
+        [Route("api/track/{id}")]
+        public async Task<ActionResult<Result<TrackDto>>> Track(int id, CancellationToken cancellationToken)
+        {
+            return await _mediator.Send(new GetTrackRequest(id), cancellationToken);
         }
     }
 }

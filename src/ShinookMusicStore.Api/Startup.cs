@@ -40,7 +40,7 @@ namespace ChinookMusicStore.Api
                 c.SwaggerDoc("v1", new Info { Title = "Chinook Music Store API", Version = "V1" });
             });
 
-            services.AddScoped<IRepository<Track>, EfRepository<Track>>();
+            services.AddScoped<IRepository<Track>, TrackRepository>();
 
             services.AddDbContext<ChinookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

@@ -11,6 +11,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Artist> builder)
         {
+            builder.ToTable("Artist");
+
             builder.Property(e => e.Id)
                 .HasColumnName("ArtistId")
                 .ValueGeneratedNever();

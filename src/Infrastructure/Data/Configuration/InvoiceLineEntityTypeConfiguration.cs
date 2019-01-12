@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<InvoiceLine> builder)
         {
+            builder.ToTable("InvoiceLine");
+
             builder.HasIndex(e => e.InvoiceId)
                 .HasName("IFK_InvoiceLineInvoiceId");
 

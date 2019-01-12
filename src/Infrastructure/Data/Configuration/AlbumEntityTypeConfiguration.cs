@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Album> builder)
         {
+            builder.ToTable("Album");
+
             builder.HasIndex(e => e.ArtistId)
             .HasName("IFK_AlbumArtistId");
 

@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Track> builder)
         {
+            builder.ToTable("Track");
+
             builder.HasIndex(e => e.AlbumId)
                 .HasName("IFK_TrackAlbumId");
 

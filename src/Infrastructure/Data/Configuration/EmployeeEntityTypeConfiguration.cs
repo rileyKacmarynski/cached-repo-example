@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
+            builder.ToTable("Employee");
+
             builder.HasIndex(e => e.ReportsTo)
             .HasName("IFK_EmployeeReportsTo");
 

@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<PlaylistTrack> builder)
         {
+            builder.ToTable("PlaylistTrack");
+
             builder.Property(e => e.Id)
                 .HasColumnName("PlayListTrackId");
 

@@ -8,6 +8,8 @@ namespace Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
+            builder.ToTable("Genre");
+
             builder.Property(e => e.Id)
                 .HasColumnName("GenreId")
                 .ValueGeneratedNever();
