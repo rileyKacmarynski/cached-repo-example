@@ -30,6 +30,8 @@ namespace ChinookMusicStore.Api
             services.AddMediatR(typeof(GetTracksRequest).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+            services.AddMemoryCache();
+
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 //TODO: Change this to a validator when I get there.
@@ -40,7 +42,9 @@ namespace ChinookMusicStore.Api
                 c.SwaggerDoc("v1", new Info { Title = "Chinook Music Store API", Version = "V1" });
             });
 
-            services.AddScoped<IRepository<Track>, TrackRepository>();
+            services.AddScoped<IReadonlyRepository<Track>, CachedTrackRepositoryDecorator>();
+            services.AddScoped(typeof(EfRepository<>));
+            services.AddScoped<TrackRepository>();
 
             services.AddDbContext<ChinookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

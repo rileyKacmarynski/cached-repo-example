@@ -25,5 +25,7 @@ namespace Domain.Models
         public virtual MediaType MediaType { get; set; }
         public virtual ICollection<InvoiceLine> InvoiceLine { get; set; }
         public virtual ICollection<PlaylistTrack> PlaylistTrack { get; set; }
+
+        public bool FromCache { get; set; } = false;
     }
 }

@@ -10,5 +10,6 @@ namespace ApplicationCore.Tracks.Dtos
         public string TrackName { get; set; }
         public string Artist { get; set; }
         public string Album { get; set; }
+        public bool FromCache { get; set; }
     }
 }

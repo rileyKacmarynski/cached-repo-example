@@ -21,5 +21,13 @@ namespace Infrastructure.Data
                 .ThenInclude(t => t.Artist)
                 .FirstAsync(t => t.Id == id);
         }
+
+        public override async Task<IEnumerable<Track>> ListAllAsync()
+        {
+            return await _context.Tracks
+                .Include(t => t.Album)
+                .ThenInclude(t => t.Artist)
+                .ToListAsync();
+        }
     }
 }

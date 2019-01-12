@@ -13,21 +13,22 @@ namespace ApplicationCore.Tracks.GetTrack
 {
     public class GetTrackRequestHandler : IRequestHandler<GetTrackRequest, Result<TrackDto>>
     {
-        private readonly IRepository<Track> _authorRepo;
+        private readonly IReadonlyRepository<Track> _trackRepo;
 
-        public GetTrackRequestHandler(IRepository<Track> authorRepo)
+        public GetTrackRequestHandler(IReadonlyRepository<Track> trackRepo)
         {
-            _authorRepo = authorRepo;
+            _trackRepo = trackRepo;
         }
         public async Task<Result<TrackDto>> Handle(GetTrackRequest request, CancellationToken cancellationToken)
         {
-            var track = await _authorRepo.GetByIdAsync(request.Id);
+            var track = await _trackRepo.GetByIdAsync(request.Id);
             var trackDto = new TrackDto
             {
                 Album = track.Album.Title,
                 TrackId = track.Id,
                 TrackName = track.Name,
-                Artist = track.Album.Artist.Name
+                Artist = track.Album.Artist.Name,
+                FromCache = track.FromCache
             };
             return Result.Ok(trackDto);
         }

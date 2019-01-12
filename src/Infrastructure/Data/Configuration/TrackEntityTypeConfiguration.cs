@@ -10,6 +10,8 @@ namespace Infrastructure.Data.Configuration
         {
             builder.ToTable("Track");
 
+            builder.Ignore(b => b.FromCache);
+
             builder.HasIndex(e => e.AlbumId)
                 .HasName("IFK_TrackAlbumId");
 

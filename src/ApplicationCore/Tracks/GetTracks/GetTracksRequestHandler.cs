@@ -14,9 +14,9 @@ namespace ApplicationCore.Tracks.GetTracks
 {
     public class GetTracksRequestHandler : IRequestHandler<GetTracksRequest, Result<IEnumerable<TrackDto>>>
     {
-        private readonly IRepository<Track> _trackRepo;
+        private readonly IReadonlyRepository<Track> _trackRepo;
 
-        public GetTracksRequestHandler(IRepository<Track> trackRepo)
+        public GetTracksRequestHandler(IReadonlyRepository<Track> trackRepo)
         {
             _trackRepo = trackRepo;
         }
@@ -26,7 +26,10 @@ namespace ApplicationCore.Tracks.GetTracks
             var dtos = tracks.Select(t => new TrackDto
             {
                 TrackId = t.Id,
-                TrackName = t.Name
+                TrackName = t.Name,
+                Album = t.Album.Title,
+                Artist = t.Album.Artist.Name,
+                FromCache = t.FromCache
             });
             return Result.Ok(dtos);
         }

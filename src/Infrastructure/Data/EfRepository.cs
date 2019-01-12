@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class EfRepository<T> : IRepository<T> where T : BaseModel
+    public class EfRepository<T> : IRepository<T>, IReadonlyRepository<T> where T : BaseModel
     {
         protected readonly ChinookContext _context;
 
