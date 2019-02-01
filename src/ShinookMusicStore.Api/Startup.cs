@@ -7,10 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using FluentValidation.AspNetCore;
-using ApplicationCore.Common;
 using MediatR;
-using ApplicationCore.Tracks.GetTracks;
-using Domain.Models;
+using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 
 namespace ChinookMusicStore.Api
@@ -27,24 +25,19 @@ namespace ChinookMusicStore.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(typeof(GetTracksRequest).Assembly);
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
 
             services.AddMemoryCache();
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                //TODO: Change this to a validator when I get there.
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Result>());             
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Chinook Music Store API", Version = "V1" });
             });
 
-            services.AddScoped<IReadonlyRepository<Track>, CachedTrackRepositoryDecorator>();
             services.AddScoped(typeof(EfRepository<>));
-            services.AddScoped<TrackRepository>();
 
             services.AddDbContext<ChinookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

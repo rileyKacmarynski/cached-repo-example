@@ -1,16 +1,13 @@
-﻿using Domain.Models;
+﻿using ApplicationCore.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IRepository<T> where T : BaseModel
+    public interface IRepository<T> : IReadonlyRepository<T> where T : BaseEntity
     {
-        //Task<T> GetSingleBySpecAsync()
-        //IEnumerable<T> List()
         T Add(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
-        //Task<int> CountAsync(ISpecification<T> spec);
     }
 }

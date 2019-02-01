@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ApplicationCore.Common
+namespace Api.Common
 {
     public class Result
     {
@@ -69,7 +70,7 @@ namespace ApplicationCore.Common
             private set { _value = value; }
         }
 
-        protected internal Result( T value, bool success, string error)
+        protected internal Result(T value, bool success, string error)
             : base(success, error)
         {
             Value = value;
