@@ -18,6 +18,7 @@ namespace ApplicationCore.Specifications
         public List<string> IncludeStrings { get; } = new List<string>();
         public Expression<Func<T, object>> OrderBy { get; private set; }
         public Expression<Func<T, object>> OrderByDescending { get; private set; }
+        public int? Take { get; set; }
 
         protected virtual void AddInclude(Expression<Func<T, object>> includeExpression)
         {
@@ -37,6 +38,11 @@ namespace ApplicationCore.Specifications
         protected virtual void ApplyOrderByDescending(Expression<Func<T, object>> orderByDescendingExpression)
         {
             OrderByDescending = orderByDescendingExpression;
+        }
+
+        protected virtual void ApplyTake(int? take)
+        {
+            Take = take;
         }
     }
 }

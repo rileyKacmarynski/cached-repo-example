@@ -19,6 +19,7 @@ namespace ApplicationCore.Entities
         public int Milliseconds { get; set; }
         public int? Bytes { get; set; }
         public decimal UnitPrice { get; set; }
+        public int Score { get; set; }
 
         public virtual Album Album { get; set; }
         public virtual Genre Genre { get; set; }

@@ -34,6 +34,11 @@ namespace Infrastructure.Data
                 query = query.OrderByDescending(specification.OrderByDescending);
             }
 
+            if(specification.Take != null)
+            {
+                query = query.Take(specification.Take.Value);
+            }
+
             return query;
         }
     }

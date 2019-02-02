@@ -10,6 +10,7 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
+using Api;
 
 namespace ChinookMusicStore.Api
 {
@@ -37,7 +38,9 @@ namespace ChinookMusicStore.Api
                 c.SwaggerDoc("v1", new Info { Title = "Chinook Music Store API", Version = "V1" });
             });
 
-            services.AddScoped(typeof(EfRepository<>));
+            services.AddScoped<IRepository<Track>, EfRepository<Track>>();
+
+            services.AddScoped<ITrackService, TrackService>();
 
             services.AddDbContext<ChinookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
