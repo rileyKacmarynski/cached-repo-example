@@ -5,21 +5,20 @@ using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IntegrationTests.Repositories.TrackRepositoryTests
 {
-    public class TopTracks
+    public class GetById
     {
         private readonly ChinookContext _context;
         private readonly EfRepository<Track> _trackRepository;
 
-        public TopTracks()
+        public GetById()
         {
             var dbOptions = new DbContextOptionsBuilder<ChinookContext>()
-                .UseInMemoryDatabase(databaseName: "GetTopTracks")
+                .UseInMemoryDatabase(databaseName: "GetTrack")
                 .Options;
 
             _context = new ChinookContext(dbOptions);
@@ -27,22 +26,21 @@ namespace IntegrationTests.Repositories.TrackRepositoryTests
         }
 
         [Test]
-        public async Task GetTopTracks()
+        public async Task GetTrack()
         {
-            var testTracks = new List<Track>
+            var trackId = 1;
+            var tracks = new List<Track>
             {
-                new Track{Id = 1, Score = 1 },
-                new Track{Id = 2, Score = 2 },
-                new Track{Id = 3, Score = 3 }
+                new Track { Id = trackId },
+                new Track { Id = 2 }
             };
-            _context.AddRange(testTracks);
+            _context.Tracks.AddRange(tracks);
             _context.SaveChanges();
 
-            var spec = new TopTracksSpecification(2);
-            var tracks = await _trackRepository.ListAsync(spec);
+            var spec = new TrackDetailSpecification(trackId);
+            var trackFromRepo = await _trackRepository.GetSingleBySpecAsync(spec);
 
-            Assert.AreEqual(3, tracks.First().Id);
-            Assert.AreEqual(2, tracks.Count());
+            Assert.AreEqual(trackId, trackFromRepo.Id);
         }
     }
 }

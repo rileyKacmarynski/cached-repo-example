@@ -37,9 +37,10 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("api/track/{id}")]
-        public IActionResult Track(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Track(int id, CancellationToken cancellationToken)
         {
-            return Json("");
+            var track = await _trackService.GetByIdAsync(id);
+            return Json(Result.Ok(track));
         }
     }
 }

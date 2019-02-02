@@ -19,6 +19,7 @@ namespace ApplicationCore.Specifications
         public Expression<Func<T, object>> OrderBy { get; private set; }
         public Expression<Func<T, object>> OrderByDescending { get; private set; }
         public int? Take { get; set; }
+        public int? Id { get; set; }
 
         protected virtual void AddInclude(Expression<Func<T, object>> includeExpression)
         {

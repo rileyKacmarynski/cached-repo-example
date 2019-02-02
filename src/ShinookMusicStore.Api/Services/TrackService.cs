@@ -18,6 +18,23 @@ namespace Api
             _trackRepository = trackRepository;
         }
 
+        public async Task<TrackDetailsDto> GetByIdAsync(int id)
+        {
+            var spec = new TrackDetailSpecification(id);
+            var track = await _trackRepository.GetSingleBySpecAsync(spec);
+            return new TrackDetailsDto
+            {
+                TrackId = track.Id,
+                Name = track.Name,
+                Album = track.Album.Title,
+                AlbumId = track.Album.Id,
+                ArtistId = track.Album.Artist.Id,
+                Artist = track.Album.Artist.Name,
+                Genre = track.Genre.Name,
+                FromCache = track.FromCache
+            };
+        }
+
         public async Task<IEnumerable<TrackDto>> GetTopTracksAsync(int? count)
         {
             var spec = new TopTracksSpecification(count);

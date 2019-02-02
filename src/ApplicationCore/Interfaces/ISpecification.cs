@@ -14,5 +14,6 @@ namespace ApplicationCore.Interfaces
         Expression<Func<T, object>> OrderByDescending { get; }
 
         int? Take { get; set; }
+        int? Id { get; set; }
     }
 }

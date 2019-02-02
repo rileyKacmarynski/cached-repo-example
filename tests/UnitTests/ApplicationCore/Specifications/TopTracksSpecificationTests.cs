@@ -30,25 +30,5 @@ namespace UnitTests.ApplicationCore.Specifications
             Assert.AreEqual(3, result.First().Id);
             Assert.AreEqual(1, result.Last().Id);
         }
-
-        [Test]
-        public void ReturnsCorrectNumber()
-        {
-            var spec = new TopTracksSpecification(2);
-
-            var testTrackList = new List<Track>
-            {
-                new Track{Id = 1, Score = 1 },
-                new Track{Id = 2, Score = 2 },
-                new Track{Id = 3, Score = 3 }
-            };
-
-            var result = testTrackList
-                .AsQueryable()
-                .OrderByDescending(spec.OrderByDescending)
-                .Take(spec.Take.Value);
-
-            Assert.AreEqual(2, result.Count());
-        }
     }
 }

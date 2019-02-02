@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Data
@@ -16,6 +17,7 @@ namespace Infrastructure.Data
         private readonly DistributedCacheEntryOptions _options;
         private readonly JsonSerializerSettings _jsonSerializerOptions;
         private static readonly string TopTracksKey = "Tracks:TopTracks";
+        private static readonly string TrackDetailsKey = "Tracks:";
 
         public CachedTrackRepository(IDistributedCache cache, IRepository<Track> trackRepository)
         {
@@ -32,14 +34,21 @@ namespace Infrastructure.Data
             throw new NotImplementedException();
         }
 
-        public Task<Track> GetSingleBySpecAsync(ISpecification<Track> spec)
+        public async Task<Track> GetSingleBySpecAsync(ISpecification<Track> spec)
         {
-            throw new NotImplementedException();
-        }
+            var key = $"{TrackDetailsKey}:{spec.Id}";
+            var trackString = _cache.GetString(key);
+            if (!string.IsNullOrWhiteSpace(trackString))
+            {
+                var cacheTrack = JsonConvert.DeserializeObject<Track>(trackString);
+                cacheTrack.FromCache = true;
+                return cacheTrack;
+            }
 
-        public Task<IReadOnlyList<Track>> ListAllAsync()
-        {
-            throw new NotImplementedException();
+            var track = await _trackRepository.GetSingleBySpecAsync(spec);
+            await _cache.SetStringAsync(key, JsonConvert.SerializeObject(track, _jsonSerializerOptions), _options);
+
+            return track;
         }
 
         public async Task<IReadOnlyList<Track>> ListAsync(ISpecification<Track> spec)
@@ -54,6 +63,11 @@ namespace Infrastructure.Data
             await _cache.SetStringAsync(TopTracksKey, JsonConvert.SerializeObject(tracks, _jsonSerializerOptions), _options);
 
             return tracks;
+        }
+
+        public Task<IReadOnlyList<Track>> ListAllAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

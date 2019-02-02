@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Api.Dtos;
 
 namespace Api.Dtos
 {
-    public class TrackDto
+    public class TrackDetailsDto
     {
         public int TrackId { get; set; }
         public string Name { get; set; }
@@ -14,5 +11,8 @@ namespace Api.Dtos
         public string Artist { get; set; }
         public int ArtistId { get; set; }
         public int Score { get; set; }
+        public string Genre { get; set; }
+        public string Composer { get; set; }
+        public bool FromCache { get; internal set; }
     }
 }

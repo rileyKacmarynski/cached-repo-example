@@ -9,5 +9,6 @@ namespace Api
     public interface ITrackService
     {
         Task<IEnumerable<TrackDto>> GetTopTracksAsync(int? count);
+        Task<TrackDetailsDto> GetByIdAsync(int id);
     }
 }
