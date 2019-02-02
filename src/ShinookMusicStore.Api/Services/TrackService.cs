@@ -11,9 +11,9 @@ namespace Api
 {
     public class TrackService : ITrackService
     {
-        private readonly IRepository<Track> _trackRepository;
+        private readonly IReadonlyRepository<Track> _trackRepository;
 
-        public TrackService(IRepository<Track> trackRepository)
+        public TrackService(IReadonlyRepository<Track> trackRepository)
         {
             _trackRepository = trackRepository;
         }

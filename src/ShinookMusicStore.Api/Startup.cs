@@ -38,7 +38,14 @@ namespace ChinookMusicStore.Api
                 c.SwaggerDoc("v1", new Info { Title = "Chinook Music Store API", Version = "V1" });
             });
 
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = Configuration["CacheConnection"];
+                
+            });
+
             services.AddScoped<IRepository<Track>, EfRepository<Track>>();
+            services.AddScoped<IReadonlyRepository<Track>, CachedTrackRepository>();
 
             services.AddScoped<ITrackService, TrackService>();
 

@@ -7,7 +7,7 @@ namespace ApplicationCore.Specifications
 {
     public class TopTracksSpecification : BaseSpecification<Track>
     {
-        public TopTracksSpecification(int? count)
+        public TopTracksSpecification(int? count = null)
             : base(t => true)                       // this is pretty hacky, but whatever...
         {
             AddInclude(t => t.Album);
