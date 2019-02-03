@@ -11,6 +11,8 @@ using MediatR;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using Api;
+using StackExchange.Redis;
+using System;
 
 namespace ChinookMusicStore.Api
 {
@@ -26,10 +28,6 @@ namespace ChinookMusicStore.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
-            services.AddMemoryCache();
-
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -38,14 +36,19 @@ namespace ChinookMusicStore.Api
                 c.SwaggerDoc("v1", new Info { Title = "Chinook Music Store API", Version = "V1" });
             });
 
-            services.AddDistributedRedisCache(options =>
-            {
-                options.Configuration = Configuration["CacheConnection"];
-                
-            });
+            string cacheConnection = Configuration.GetConnectionString("CacheConnection");
+            services.AddSingleton(ConnectionMultiplexer.Connect(cacheConnection).GetDatabase());
+
+            // this registers the IDistributedCache Interface to our redis cache
+            // if we want to use the Execute method we need to register the cache
+            // to the IDatabase interface
+            //services.AddDistributedRedisCache(options =>
+            //{
+            //    options.Configuration = Configuration["CacheConnection"];
+            //});
 
             services.AddScoped<IRepository<Track>, EfRepository<Track>>();
-            services.AddScoped<IReadonlyRepository<Track>, CachedTrackRepository>();
+            services.AddScoped<IReadonlyRepository<Track>, DopeCachedTrackRepository>();
 
             services.AddScoped<ITrackService, TrackService>();
 

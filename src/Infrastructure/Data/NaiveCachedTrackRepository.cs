@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class CachedTrackRepository : IReadonlyRepository<Track>
+    public class NaiveCachedTrackRepository : IReadonlyRepository<Track>
     {
         private readonly IDistributedCache _cache;
         private readonly IRepository<Track> _trackRepository;
@@ -19,7 +19,7 @@ namespace Infrastructure.Data
         private static readonly string TopTracksKey = "Tracks:TopTracks";
         private static readonly string TrackDetailsKey = "Tracks:";
 
-        public CachedTrackRepository(IDistributedCache cache, IRepository<Track> trackRepository)
+        public NaiveCachedTrackRepository(IDistributedCache cache, IRepository<Track> trackRepository)
         {
             _cache = cache;
             _trackRepository = trackRepository;

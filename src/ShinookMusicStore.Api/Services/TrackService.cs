@@ -37,6 +37,7 @@ namespace Api
 
         public async Task<IEnumerable<TrackDto>> GetTopTracksAsync(int? count)
         {
+            if (count == null) count = 50;
             var spec = new TopTracksSpecification(count);
             var tracks = await _trackRepository.ListAsync(spec);
 
@@ -48,7 +49,8 @@ namespace Api
                 ArtistId = t.Album.ArtistId,
                 Album = t.Album.Title,
                 AlbumId = t.Album.Id,
-                Score = t.Score
+                Score = t.Score,
+                FromCache = t.FromCache
             });
         }
     }

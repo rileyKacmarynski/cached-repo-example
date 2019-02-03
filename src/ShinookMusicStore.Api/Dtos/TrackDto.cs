@@ -14,5 +14,6 @@ namespace Api.Dtos
         public string Artist { get; set; }
         public int ArtistId { get; set; }
         public int Score { get; set; }
+        public bool FromCache { get; internal set; }
     }
 }
