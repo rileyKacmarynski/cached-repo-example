@@ -3,6 +3,7 @@ import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import styled from 'styled-components';
 
 import { fetchAsync } from '../code/helpers';
@@ -10,8 +11,8 @@ import TrackListItem from './track-list-item';
 
 const TrackList = styled.div`
   padding-top: 10px;
+  text-align: center;
   h3 {
-    text-align: center;
     padding-top: 10px;
   }
 `;
@@ -38,9 +39,13 @@ class TopTracks extends Component {
               </Typography>
               <div>
                 <List>
-                  {this.state.tracks.map(track => (
-                    <TrackListItem track={track} key={track.trackId} />
-                  ))}
+                  {this.state.tracks.length === 0 ? (
+                    <CircularProgress />
+                  ) : (
+                    this.state.tracks.map(track => (
+                      <TrackListItem track={track} key={track.trackId} />
+                    ))
+                  )}
                 </List>
               </div>
             </Paper>
