@@ -12,6 +12,7 @@ namespace ApplicationCore.Specifications
         {
             AddInclude(t => t.Album);
             AddInclude(t => t.Album.Artist);
+            AddInclude(t => t.Genre);
             ApplyOrderByDescending(t => t.Score);
             ApplyTake(count);
         }
