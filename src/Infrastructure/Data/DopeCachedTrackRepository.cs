@@ -20,9 +20,9 @@ namespace Infrastructure.Data
         private static readonly string TopTracksKey = "Tracks:TopTracks";
         private static readonly string TracksKey = "Tracks";
 
-        public DopeCachedTrackRepository(IDatabase cache, IRepository<Track> trackRepository)
+        public DopeCachedTrackRepository(IConnectionMultiplexer connectionMultiplexer, IRepository<Track> trackRepository)
         {
-            _cache = cache;
+            _cache = connectionMultiplexer.GetDatabase();
             _trackRepository = trackRepository;
 
             _options = new DistributedCacheEntryOptions()

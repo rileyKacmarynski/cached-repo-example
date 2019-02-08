@@ -37,7 +37,7 @@ namespace ChinookMusicStore.Api
             });
 
             string cacheConnection = Configuration.GetConnectionString("CacheConnection");
-            services.AddSingleton(ConnectionMultiplexer.Connect(cacheConnection).GetDatabase());
+            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(cacheConnection));
 
             // this registers the IDistributedCache Interface to our redis cache
             // if we want to use the Execute method we need to register the cache
